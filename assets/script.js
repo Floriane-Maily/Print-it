@@ -22,32 +22,17 @@ let arrowLeft = document.createElement("img")
 arrowLeft.src = "./assets/images/arrow_left.png"
 arrowLeft.alt = "flèche vers l'image précédente"
 arrowLeft.classList.add("arrow", "arrow_left")
-arrowLeft.addEventListener("click", () => {
-	console.log("photo précédente")
-})
+// arrowLeft.addEventListener("click", () => {
+// 	console.log("photo précédente")
+// })
 
 let arrowRight = document.createElement("img")
 arrowRight.src = "./assets/images/arrow_right.png"
 arrowRight.alt = "flèche vers l'image suivante"
 arrowRight.classList.add("arrow", "arrow_right")
-arrowRight.addEventListener("click", () => {
-	console.log("photo suivante")
-})
-
-
-//////////// AUTRE VERSION PLUS CONCISE DU CODE CI-DESSUS ///////////
-
-// function createArrow(src, alt, classes) {
-//     let arrow = document.createElement("img")
-//     arrow.src = src
-//     arrow.alt = alt
-//     classes.forEach(cls => arrow.classList.add(cls))
-//     return arrow
-// }
-
-// let arrowLeft = createArrow("./assets/images/arrow_left.png", "flèche vers l'image précédente", ["arrow", "arrow_left"])
-// let arrowRight = createArrow("./assets/images/arrow_right.png", "flèche vers l'image suivante", ["arrow", "arrow_right"])
-////////////////////////////////////////////////////////
+// arrowRight.addEventListener("click", () => {
+// 	console.log("photo suivante")
+// })
 
 
 // Ajout & placement des éléments flèches dans la div correspondante
@@ -58,13 +43,11 @@ divBanner.insertBefore(arrowLeft, divBanner.childNodes[2])
 divBanner.insertBefore(arrowRight, divBanner.childNodes[3])
 
 
-// Ajout des bulletpoints au slider
+// création des bulletpoints
 let dots = document.querySelector(".dots")
-
 let dotSelected = document.createElement("span")
 dotSelected.classList.add("dot", "dot_selected")
 dots.appendChild(dotSelected)
-
 
 for (i = 0; i < 3; i++) {
 	let dot = document.createElement("span")
@@ -73,12 +56,47 @@ for (i = 0; i < 3; i++) {
 }
 
 
-// Modification du slide au click
-for (i = 0; i < slides.length; i++) {
-	arrowRight.addEventListener("click"), () => {
+// Slides
+const carousel = document.querySelector("#banner");
+const carouselImage = carousel.children.item(0);
+const carouselTag = carousel.children.item(1);
 
+let count = 0
+
+function bulletPoints() {
+	for (let i = 0; i < dots.length; i++) {
+		if (i === count) {
+			dots[i].classList.add("dot_selected");
+		}
+		else {
+			dots[i].classList.remove("dot_selected");
+		}
 	}
 }
+
+
+arrowRight.addEventListener("click", function () {
+	count++
+	if (count >= slides.length) { count = 0 }
+	carouselImage.src = "./assets/images/slideshow/" + slides[count].image;
+	carouselTag.innerHTML = slides[count].tagLine
+	bulletPoints()
+})
+
+arrowLeft.addEventListener("click", function () {
+	count--
+	if (count < 0) { count = slides.length - 1; }
+	carouselImage.src = "./assets/images/slideshow/" + slides[count].image
+	carouselTag.innerHTML = slides[count].tagLine
+	bulletPoints()
+})
+
+
+
+
+
+
+
 
 
 
