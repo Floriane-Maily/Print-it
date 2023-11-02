@@ -44,15 +44,13 @@ divBanner.insertBefore(arrowRight, divBanner.childNodes[3])
 
 
 // création des bulletpoints
-let dots = document.querySelector(".dots")
-let dotSelected = document.createElement("span")
-dotSelected.classList.add("dot", "dot_selected")
-dots.appendChild(dotSelected)
+let dotDiv = document.querySelector(".dots");
+let dots = dotDiv.children;
 
-for (i = 0; i < 3; i++) {
-	let dot = document.createElement("span")
+for (let i = 0; i < slides.length; i++) {
+	let dot = document.createElement("div")
 	dot.classList.add("dot")
-	dots.appendChild(dot)
+	dotDiv.appendChild(dot)
 }
 
 
